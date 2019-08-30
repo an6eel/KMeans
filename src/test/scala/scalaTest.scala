@@ -5,8 +5,6 @@ import kmeans.par
 import org.scalameter.Bench
 import org.scalameter.api._
 
-
-
 object Data2 {
 
   def read(path: String,sep : Char, header : Int, clase : Int): List[CPoint] = {
@@ -45,13 +43,13 @@ object KmeanTest extends Bench.LocalTime {
 
   }
 
- /* performance of "Kmeans" in {
+  performance of "Kmeans" in {
     measure method "train" in {
       using(Data2.sizes2) curve "Secuencial" in {
         Kmeans(Data2.K3,_,Data2.P3).train
       }
     }
-  }*/
+  }
 
 
 }
