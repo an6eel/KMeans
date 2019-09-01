@@ -1,11 +1,15 @@
 package fp;
 
 import com.codepoetics.protonpack.StreamUtils;
+import scala.Char;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -60,5 +64,12 @@ public class Point implements Serializable {
                 .zip(values.get(),b.values.get(),(x,y) -> Math.pow(x-y,2))
                 .reduce(Double::sum).get();
         return value;
+    }
+
+    @Override
+    public String toString() {
+        ArrayList<Double> values = getValues()
+                        .collect(Collectors.toCollection(ArrayList::new));
+        return Arrays.toString(values.toArray());
     }
 }

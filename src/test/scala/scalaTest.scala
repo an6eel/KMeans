@@ -8,12 +8,12 @@ import org.scalameter.api._
 object Data2 {
 
   /**
-    * Lectura de los datos (implementacion funcional)
+    * Lectura de los datos
     *
     * @param path  Ruta relativa del archivo de datos
     * @param header     Lineas iniciales a ignorar
     * @param sep   Separador
-    * @param clase Indica si el conjunto de datos contiene la columna de etiquetas
+    * @param clase Columnas a la derecha a ignorar
     * @return Lista de puntos
     */
 

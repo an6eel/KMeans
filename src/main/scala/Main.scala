@@ -15,33 +15,35 @@ object Main extends App {
 
   /**
     * Lectura de los datos
-    * @param path Ruta relativa del archivo de datos
+    *
+    * @param path  Ruta relativa del archivo de datos
+    * @param header     Lineas iniciales a ignorar
+    * @param sep   Separador
+    * @param clase Columnas a la derecha a ignorar
     * @return Lista de puntos
     */
 
-  def read(path: String,sep : Char): List[CPoint] = {
-    scala.io.Source
-      .fromFile(new File(path))
-      .getLines().drop(1).toList
-      .map(_.split(sep))
-      .map(_.dropRight(1).toList.map(_.toDouble))
-  }
+  def read(path: String,sep : Char, header : Int, clase : Int): List[CPoint] = scala.io.Source
+    .fromFile(new File(path))
+    .getLines().drop(header).toList
+    .map(_.split(sep))
+    .map(_.dropRight(clase).toList.map(_.toDouble))
 
-  def readwoDrop(path: String,sep : Char): List[CPoint] = {
-    scala.io.Source
-      .fromFile(new File(path))
-      .getLines().drop(1).toList
-      .map(_.split(sep))
-      .map(_.toList.map(_.toDouble))
-  }
-  val Points2 = readwoDrop("data/MINST.txt", ' ')
 
-  // Lectura de datos
+  val Points = read("data/a1.txt",' ',0,0)
 
-  val Points = read("data/a1_raw.csv",',')
-  println(Points2.length)
+  val kmeansPar = par.Kmeans(5,250,Points).train
+  val kmeans = sec.Kmeans(5,250,Points).train
 
-  val kmeans = par.Kmeans(10,1,Points2).train
+  println("Sin paralelizacion")
+  kmeans.foreach(cluster => {
+    println("Centroide: "+ cluster.center.mkString("[",",","]") + " Miembros: " + cluster.members.length)
+  })
+
+  println("Con paralelizacion")
+  kmeansPar.foreach(cluster => {
+    println("Centroide: "+ cluster.center.mkString("[",",","]") + " Miembros: " + cluster.members.length)
+  })
 
 
 

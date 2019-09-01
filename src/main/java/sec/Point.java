@@ -3,6 +3,7 @@ package sec;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.lang.*;
+import java.util.Arrays;
 
 /**
  * Clase que representa un punto del Cluster
@@ -62,6 +63,11 @@ public class Point implements Serializable {
 
     public double error(Point other) throws Exception {
         return Math.pow(euclidean(other),2);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(this.values.toArray());
     }
 
 }
