@@ -45,3 +45,45 @@ __Palabras clave__ : Paradigma Imperativo, Paradigma Funcional, Agrupamiento, K-
 - `src/test`: Archivos de prueba
     - `java`: Archivo de prueba para las implementaciones en Java
     - `scala`: Archivo de prueba para las implementaciones en Scala
+- `scripts`: Scripts utilizados para realizar los tests
+    - `parseResults.py`: Se ejecuta para parsear los resultados de los tests
+    - `plotData.R`: Una vez se han parseado los datos, nos permite obtener una grafica comparativa
+    - `run_tests.sh`: Ejecuta los tests y parsea los resultados, obteniendo cuatro ficheros con los datos parseados.
+    
+### Ejecución de las pruebas
+
+Para ejecutar las pruebas implementadas basta con ejecutar el script `run_tests.sh`.
+Este scripts ejecuta los tests tanto de las implementaciones de Scala como las de Java. La ejecucion de
+de los tests nos devuelve un log completo de la ejecución y los resultados. Este los log se parsea con el 
+archivo `parseResults.py` pasandole los logs de los dos tests como parametros. Esto nos creará cuatro archivos con los
+resultados parseados de cada una de la implementaciones.
+
+Si se quiere obtener una grafica comparativa de estos resultados, basta con ejecutar
+
+```
+Rscript plotData.R
+```
+
+En caso de querer ejecutar un determinado test individualmente, el comando a ejecutar es el siguiente:
+
+```
+sbt "testOnly <Test>"
+```
+
+Los posibles tests a ejecutar son : `KmeanTest` y `javaTest`
+
+Para ejecutar los tests individualmente, los tests deben estar previamente compilados con `sbt "test:compile"`
+
+### Conjuntos de datos
+
+Los conjuntos de datos utilizados son los siguientes:
+
+- [Gesture Phase Segmentation](https://archive.ics.uci.edu/ml/datasets/Gesture+Phase+Segmentation)
+- [ISOLET](https://archive.ics.uci.edu/ml/datasets/isolet)
+- [Banknote Authentication](https://archive.ics.uci.edu/ml/datasets/banknote+authentication)
+- [Libras Movement](https://archive.ics.uci.edu/ml/datasets/Libras+Movement)
+
+Los tests están configurados para ejecutarse sobre uno de estos conjuntos de datos. En caso de querer cambiar el
+conjunto de datos a utilizar deben modificarse la variable `DATASET` en los ficheros `javaTest.java` y
+ `scalaTest.scala`. Esta variable se corresponde con el indice del conjunto de datos a usar. Sus valores van de 0 a 3,
+ correspondiendose con el orden en que se han listado los conjuntos de datos
