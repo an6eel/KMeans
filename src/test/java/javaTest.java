@@ -92,7 +92,7 @@ public class javaTest extends JBench.OfflineReport {
         return super.reporter();
     }
 
-    public final JGen<Integer> sizes = JGen.range("iters", 1, 10, 1);
+    public final JGen<Integer> sizes = JGen.range("iters", 1, 20, 1);
 
 
     @Override
