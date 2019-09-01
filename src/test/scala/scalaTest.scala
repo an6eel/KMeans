@@ -16,8 +16,8 @@ object Data2 {
   }
 
 
-  val sizes: Gen[Int] = Gen.range("iters")(1, 1, 1)
-  val sizes2: Gen[Int] = Gen.range("iters")(1, 1, 1)
+  val sizes: Gen[Int] = Gen.range("iters")(1, 10, 1)
+  val sizes2: Gen[Int] = Gen.range("iters")(1, 10, 1)
 
   val P1 = read("data/a1_raw.csv",',',1,1)
   val P2 = read("data/isolet5.data",',',0,0)
@@ -32,7 +32,7 @@ object Data2 {
 }
 
 
-object KmeanTest extends Bench.LocalTime {
+object KmeanTest extends Bench.OfflineReport {
 
   performance of "Kmeans"  in {
     measure method "par train" in {
