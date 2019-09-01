@@ -53,15 +53,14 @@ public class main {
 
 
     public static void main(String... args) throws Exception {
-        ArrayList<fp.Point> points = readFP("/home/angel/Escritorio/TFG/Kmeans/data/a1.txt");
+        ArrayList<fp.Point> points = readFP("data/a1.txt");
         fp.Kmeans km= new fp.Kmeans(5,250,points);
         ArrayList<fp.Cluster> train=km.train();
         fp.Kmeans.elbowMethod(points,10).stream().forEach(s->System.out.println(s));
 
-        ArrayList<sec.Point> points2 = readSec("/home/angel/Escritorio/TFG/Kmeans/data/a1.txt");
+        ArrayList<sec.Point> points2 = readSec("data/a1.txt");
         sec.Kmeans kmsec = new sec.Kmeans(5,250,points2);
         ArrayList<sec.Cluster> train2=kmsec.train();
-       // sec.Kmeans.elbowMethod(points2,10).stream().forEach(s->System.out.println(s));
 
 
     }
